@@ -2,9 +2,20 @@ var isNative = require("is_native"),
     isString = require("is_string");
 
 
-var nativeTrim = String.prototype.trim,
+var StringPrototype = String.prototype,
+
+    nativeTrim = StringPrototype.trim,
+    nativeTrimLeft = StringPrototype.trimLeft,
+    nativeTrimRight = StringPrototype.trimRight,
+
     reTrim = /^[\s\xA0]+|[\s\xA0]+$/g,
-    baseTrim;
+    reTrimLeft = /^[\s\xA0]+/g,
+    reTrimRight = /[\s\xA0]+$/g,
+
+    baseTrim, baseTrimLeft, baseTrimRight;
+
+
+module.exports = trim;
 
 
 if (isNative(nativeTrim)) {
@@ -17,7 +28,35 @@ if (isNative(nativeTrim)) {
     };
 }
 
+if (isNative(nativeTrimLeft)) {
+    baseTrimLeft = function baseTrimLeft(str) {
+        return nativeTrimLeft.call(str);
+    };
+} else {
+    baseTrimLeft = function baseTrimLeft(str) {
+        return str.replace(reTrimLeft, "");
+    };
+}
 
-module.exports = function trim(str) {
+if (isNative(nativeTrimRight)) {
+    baseTrimRight = function baseTrimRight(str) {
+        return nativeTrimRight.call(str);
+    };
+} else {
+    baseTrimRight = function baseTrimRight(str) {
+        return str.replace(reTrimRight, "");
+    };
+}
+
+
+function trim(str) {
     return baseTrim(isString(str) ? str : String(str));
+}
+
+trim.left = function trimLeft(str) {
+    return baseTrimLeft(isString(str) ? str : String(str));
+};
+
+trim.right = function trimRight(str) {
+    return baseTrimRight(isString(str) ? str : String(str));
 };
