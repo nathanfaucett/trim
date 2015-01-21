@@ -50,13 +50,13 @@ if (isNative(nativeTrimRight)) {
 
 
 function trim(str) {
-    return baseTrim(isString(str) ? str : String(str));
+    return isString(str) ? baseTrim(str) : str;
 }
 
 trim.left = function trimLeft(str) {
-    return baseTrimLeft(isString(str) ? str : String(str));
+    return isString(str) ? baseTrimLeft(str) : str;
 };
 
 trim.right = function trimRight(str) {
-    return baseTrimRight(isString(str) ? str : String(str));
+    return isString(str) ? baseTrimRight(str) : str;
 };
