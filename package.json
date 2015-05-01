@@ -21,7 +21,7 @@
     "mocha": "^2.1.0"
   },
   "dependencies": {
-    "is_native": "nathanfaucett/is_native",
-    "is_string": "nathanfaucett/is_string"
+    "is_native": "git://github.com/nathanfaucett/is_native",
+    "to_string": "git://github.com/nathanfaucett/to_string"
   }
 }

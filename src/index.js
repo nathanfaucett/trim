@@ -1,12 +1,8 @@
 var isNative = require("is_native"),
-    isString = require("is_string");
+    toString = require("to_string");
 
 
 var StringPrototype = String.prototype,
-
-    nativeTrim = StringPrototype.trim,
-    nativeTrimLeft = StringPrototype.trimLeft,
-    nativeTrimRight = StringPrototype.trimRight,
 
     reTrim = /^[\s\xA0]+|[\s\xA0]+$/g,
     reTrimLeft = /^[\s\xA0]+/g,
@@ -18,9 +14,9 @@ var StringPrototype = String.prototype,
 module.exports = trim;
 
 
-if (isNative(nativeTrim)) {
+if (isNative(StringPrototype.trim)) {
     baseTrim = function baseTrim(str) {
-        return nativeTrim.call(str);
+        return str.trim();
     };
 } else {
     baseTrim = function baseTrim(str) {
@@ -28,9 +24,9 @@ if (isNative(nativeTrim)) {
     };
 }
 
-if (isNative(nativeTrimLeft)) {
+if (isNative(StringPrototype.trimLeft)) {
     baseTrimLeft = function baseTrimLeft(str) {
-        return nativeTrimLeft.call(str);
+        return str.trimLeft();
     };
 } else {
     baseTrimLeft = function baseTrimLeft(str) {
@@ -38,9 +34,9 @@ if (isNative(nativeTrimLeft)) {
     };
 }
 
-if (isNative(nativeTrimRight)) {
+if (isNative(StringPrototype.trimRight)) {
     baseTrimRight = function baseTrimRight(str) {
-        return nativeTrimRight.call(str);
+        return str.trimRight();
     };
 } else {
     baseTrimRight = function baseTrimRight(str) {
@@ -50,13 +46,13 @@ if (isNative(nativeTrimRight)) {
 
 
 function trim(str) {
-    return isString(str) ? baseTrim(str) : str;
+    return baseTrim(toString(str));
 }
 
 trim.left = function trimLeft(str) {
-    return isString(str) ? baseTrimLeft(str) : str;
+    return baseTrimLeft(toString(str));
 };
 
 trim.right = function trimRight(str) {
-    return isString(str) ? baseTrimRight(str) : str;
+    return baseTrimRight(toString(str));
 };
