@@ -1,5 +1,5 @@
-var isNative = require("is_native"),
-    toString = require("to_string");
+var isNative = require("@nathanfaucett/is_native"),
+    toString = require("@nathanfaucett/to_string");
 
 
 var StringPrototype = String.prototype,

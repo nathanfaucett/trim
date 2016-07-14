@@ -1,4 +1,4 @@
 trim
 =======
 
-trim for the browser and node.js
+trim strings whitespace
